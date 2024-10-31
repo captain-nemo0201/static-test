@@ -1,0 +1,9 @@
+- name: Configure SSH settings
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "{{ item }}"
+  loop:
+    - "PermitRootLogin no"
+    - "PasswordAuthentication yes"
+    - "X11Forwarding no"
+    - "LogLevel VERBOSE"

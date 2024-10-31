@@ -1,0 +1,26 @@
+- name: Ensure user is present with specified properties
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell }}"
+    state: "{{ item.state }}"
+    password: "{{ item.password }}"
+    groups: "{{ item.groups | default([]) }}"
+  loop: "{{ users }}"
+
+- name: Create .ssh directory for user
+  file:
+    path: "/home/{{ item.name }}/.ssh"
+    state: directory
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: '0700'
+  when: item.ssh_key is defined
+  loop: "{{ users }}"
+
+- name: Add public SSH key to authorized_keys
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.ssh_key }}"
+  when: item.ssh_key is defined
+  loop: "{{ users }}"

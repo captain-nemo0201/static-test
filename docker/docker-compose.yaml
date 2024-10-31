@@ -1,0 +1,15 @@
+# docker/docker-compose.yml
+version: '3.8'
+
+services:
+  static_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2222:22"    # SSH доступ
+      - "8080:80"    # Порт для Nginx
+    volumes:
+      - ./ssh-keys/webserver.pub:/home/ansible/.ssh/authorized_keys
+    container_name: static_server
+

@@ -1,0 +1,18 @@
+---
+ansible_become: yes
+ansible_user: ansible
+ansible_become_method: sudo
+
+users:
+  - name: "username"
+    shell: "/bin/zsh"
+    state: "present"
+    password: "password_hash"
+    groups: ["sudo"]
+    ssh_key: "public_key"
+
+additional_packages:
+  - htop
+  - ncdu
+  - git
+  - nano

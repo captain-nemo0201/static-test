@@ -1,0 +1,14 @@
+- hosts: all
+  roles:
+  - role: user_management
+    tags: users,all
+  - role: shell_setup
+    tags: shell,all
+  - role: ssh_config
+    tags: ssh,all
+  - role: packages_install
+    tags: packages,all
+  - role: nginx_install
+    tags: nginx,all
+  - role: static_files
+    tags: static,all

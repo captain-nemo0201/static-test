@@ -1,0 +1,13 @@
+server {
+    listen 80;
+    server_name 127.0.0.1;
+
+    location /images/ {
+        alias /srv/images/;
+        autoindex on;
+        gzip on;
+        gzip_types image/jpeg image/png image/jpg;
+        expires 1h;
+        access_log /var/log/nginx/static_access.log;
+    }
+}
